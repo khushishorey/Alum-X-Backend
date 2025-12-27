@@ -1,5 +1,6 @@
 package com.opencode.alumxbackend.users.controller;
 
+import com.opencode.alumxbackend.common.exception.UnauthorizedAccessException;
 import com.opencode.alumxbackend.users.dto.UserRequest;
 import com.opencode.alumxbackend.users.model.User;
 import com.opencode.alumxbackend.users.model.UserRole;
@@ -31,11 +32,10 @@ public class UserController {
             @RequestHeader(value = "X-DUMMY-TOKEN", required = false) String token,
             @Valid @RequestBody UserRequest request) {
 
-        if (token == null || !token.equals(DUMMY_TOKEN)) {
-            logger.warning("Unauthorized access attempt to Dev API. Missing or invalid token.");
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(Map.of("error", "Invalid or missing X-DUMMY-TOKEN header"));
-        }
+//        if (token == null || !token.equals(DUMMY_TOKEN)) {
+//            logger.warning("Unauthorized access attempt to Dev API. Missing or invalid token.");
+//            throw new UnauthorizedAccessException("Invalid or missing X-DUMMY-TOKEN header");
+//        }
 
         logger.info("Creating new user: " + request.getUsername() + " with role: " + request.getRole());
         User user = userService.createUser(request);

@@ -1,5 +1,6 @@
 package com.opencode.alumxbackend.jobposts.controller;
 
+import com.opencode.alumxbackend.common.exception.UnauthorizedAccessException;
 import com.opencode.alumxbackend.jobposts.dto.JobPostRequest;
 import com.opencode.alumxbackend.jobposts.model.JobPost;
 import com.opencode.alumxbackend.jobposts.service.JobPostService;
@@ -30,8 +31,7 @@ public class JobPostController {
         // 1. Temporary auth
         if (token == null || !token.equals(DUMMY_TOKEN)) {
             logger.warning("Unauthorized job post attempt. Token: " + token);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("error", "Unauthorized: Invalid or missing X-DUMMY-TOKEN header"));
+            throw new UnauthorizedAccessException("Unauthorized: Invalid or missing X-DUMMY-TOKEN header");
         }
         try{
             logger.info("Processing job post creation for user: " + request.getUsername());
