@@ -1,6 +1,6 @@
 package com.opencode.alumxbackend.users.service;
 
-import com.opencode.alumxbackend.common.exception.BadRequestException;
+import com.opencode.alumxbackend.common.exception.Errors.BadRequestException;
 import com.opencode.alumxbackend.users.dto.UserRequest;
 import com.opencode.alumxbackend.users.model.User;
 import com.opencode.alumxbackend.users.model.UserRole;

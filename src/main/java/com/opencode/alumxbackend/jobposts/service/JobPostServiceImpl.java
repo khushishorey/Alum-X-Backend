@@ -7,9 +7,9 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.opencode.alumxbackend.common.exception.BadRequestException;
-import com.opencode.alumxbackend.common.exception.ForbiddenException;
-import com.opencode.alumxbackend.common.exception.ResourceNotFoundException;
+import com.opencode.alumxbackend.common.exception.Errors.BadRequestException;
+import com.opencode.alumxbackend.common.exception.Errors.ForbiddenException;
+import com.opencode.alumxbackend.common.exception.Errors.ResourceNotFoundException;
 import com.opencode.alumxbackend.jobposts.dto.JobPostRequest;
 import com.opencode.alumxbackend.jobposts.model.JobPost;
 import com.opencode.alumxbackend.jobposts.repository.JobPostRepository;
@@ -72,10 +72,10 @@ public class JobPostServiceImpl implements JobPostService{
     @Override
     public void deletePostByUser(Long userId, String postId) {
         var user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with the id " + userId));
 
         JobPost post = jobPostRepository.findById(postId)
-                .orElseThrow(() -> new ResourceNotFoundException("Post", "postId", postId));
+                .orElseThrow(() -> new ResourceNotFoundException("Post not found with postId " + postId));
 
         if (!post.getUsername().equals(user.getUsername())) {
             throw new ForbiddenException("User is not the owner of the post");

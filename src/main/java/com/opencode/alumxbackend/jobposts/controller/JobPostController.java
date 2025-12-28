@@ -1,6 +1,6 @@
 package com.opencode.alumxbackend.jobposts.controller;
 
-import com.opencode.alumxbackend.common.exception.UnauthorizedAccessException;
+import com.opencode.alumxbackend.common.exception.Errors.UnauthorizedAccessException;
 import com.opencode.alumxbackend.jobposts.dto.JobPostRequest;
 import com.opencode.alumxbackend.jobposts.model.JobPost;
 import com.opencode.alumxbackend.jobposts.service.JobPostService;

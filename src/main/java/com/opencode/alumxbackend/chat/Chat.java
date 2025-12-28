@@ -47,41 +47,4 @@ public class Chat {
     private String user2Username;
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
-
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getUser1Username() {
-        return user1Username;
-    }
-
-    public String getUser2Username() {
-        return user2Username;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUser1Username(String user1Username) {
-        this.user1Username = user1Username;
-    }
-
-    public void setUser2Username(String user2Username) {
-        this.user2Username = user2Username;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
 }

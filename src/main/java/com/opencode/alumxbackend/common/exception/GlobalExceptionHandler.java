@@ -1,7 +1,9 @@
 package com.opencode.alumxbackend.common.exception;
 
-import java.util.Map;
-
+import com.opencode.alumxbackend.common.exception.Errors.BadRequestException;
+import com.opencode.alumxbackend.common.exception.Errors.ForbiddenException;
+import com.opencode.alumxbackend.common.exception.Errors.ResourceNotFoundException;
+import com.opencode.alumxbackend.common.exception.Errors.UnauthorizedAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -11,18 +13,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice()
 public class GlobalExceptionHandler{
-
-    @ExceptionHandler(Throwable.class)
-    public ResponseEntity<Map<String, Object>> catchEverything(Throwable ex) {
-
-        ex.printStackTrace(); // 👈 THIS IS KEY
-
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(Map.of(
-                        "type", ex.getClass().getName(),
-                        "message", ex.getMessage()
-                ));
-    }
 
 
     @ExceptionHandler(ResourceNotFoundException.class)
@@ -67,16 +57,6 @@ public class GlobalExceptionHandler{
                 java.time.LocalDateTime.now()
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
-    }
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleAll(Exception ex) {
-        ErrorResponse errorResponse = new ErrorResponse(
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                "Internal Server Error",
-                ex.getMessage(),
-                java.time.LocalDateTime.now()
-        );
-        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 
